@@ -3,7 +3,8 @@
         "ts": "ts-node"
     },
     "env": {
-        "MONGO_URL" : "mongodb+srv://rey:123@cluster0.4yxcw9f.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
-        "PORT" : "5000"
+        "MONGO_URL" : "mongodb+srv://aramismartinez15:qPFQfEmtt9R3N0FL@cluster0.qzdllgk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+        "PORT" : "5000",
+        "DB_NAME": "balp"
     }
 }

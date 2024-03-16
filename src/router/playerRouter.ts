@@ -1,9 +1,10 @@
 import { Router, Request, Response } from 'express';
-import { post, get } from '../controller/playerController';
+import { post, get, getById } from '../controller/playerController';
 
 const playerRouter = Router()
 
 playerRouter.post('/', post)
-playerRouter.get('/:name', get)
+playerRouter.get('/', get)
+playerRouter.get('/:_id', getById)
 
 export default playerRouter;

@@ -1,32 +1,18 @@
 import { Request, Response } from 'express'
-
-type Stats = {
-    STR: number,
-    AGI: number,
-    INT: number,
-}
-
-type Class = 'WARRIOR' | 'MAGE' | 'ROGUE';
-
-type Player = {
-    name: string,
-    class: Class,
-    stats: Stats
-}
-
-type DB = {
-    [name: string]: Player
-}
-
-const db: DB = {}
+import PlayerModel from '../models/PlayerModel'
 
 export const post = (req: Request, res: Response) => {
-    const player = req.body
-    db[player.name] = player;
-    res.send(player)
+  const player = req.body
+  res.send(player)
 }
 
-export const get = (req: Request, res: Response) => {
-    const { name } = req.params
-    res.send(db[name])
+export const get = async (req: Request, res: Response) => {
+  const data = await PlayerModel.find({});
+  res.send(data);
+}
+
+export const getById = async (req: Request, res: Response) => {
+  const { _id } = req.params;
+  const data = await PlayerModel.findById({_id: _id});
+  res.status(200).send(data);
 }

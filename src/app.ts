@@ -1,8 +1,10 @@
 import express, { Express, Request, Response } from "express";
+import cors from "cors";
 import { itemRouter, playerRouter, weaponRouter } from './router'
 
 const app: Express = express();
 
+app.use(cors({origin: "*"}));
 app.use(express.json());
 
 app.use('/player', playerRouter);
