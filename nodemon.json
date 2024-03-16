@@ -1,0 +1,9 @@
+{
+    "execMap": {
+        "ts": "ts-node"
+    },
+    "env": {
+        "MONGO_URL" : "mongodb+srv://rey:123@cluster0.4yxcw9f.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+        "PORT" : "5000"
+    }
+}

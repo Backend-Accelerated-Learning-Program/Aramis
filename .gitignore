@@ -1,0 +1,7 @@
+# IDE Files
+
+# DB Files
+
+# Ignored Files
+node_modules/
+.env
