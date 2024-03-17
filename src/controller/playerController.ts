@@ -1,18 +1,46 @@
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import PlayerModel from '../models/PlayerModel'
-
+import { ERROR_TYPES } from '../middleware/errorHandler'
 export const post = (req: Request, res: Response) => {
   const player = req.body
   res.send(player)
 }
 
-export const get = async (req: Request, res: Response) => {
-  const data = await PlayerModel.find({});
-  res.send(data);
+export const get = async (req: Request, res: Response, next: NextFunction) => {
+  try{
+    const data = await PlayerModel.find({});
+    // const data: [] = [];
+    if(!data){
+      throw new Error(ERROR_TYPES.internalError.message)
+      // res.status(500).send({status: 500, message: "Internal Server Error"})
+    }
+
+    if(data.length === 0) {
+      throw new Error(ERROR_TYPES.notFoundError.message)
+    }
+    res.status(200).send(data);
+  }
+  catch(error){
+    next(error)
+  }
 }
 
-export const getById = async (req: Request, res: Response) => {
-  const { _id } = req.params;
-  const data = await PlayerModel.findById({_id: _id});
-  res.status(200).send(data);
+export const getById = async (req: Request, res: Response, next: NextFunction) => {
+ 
+  try{
+    const { _id } = req.params;
+    const data = await PlayerModel.findById({ _id }).catch(err => {
+      throw new Error(ERROR_TYPES.badRequestError.message)
+    })
+
+    if(!data){
+      throw new Error(ERROR_TYPES.notFoundError.message)
+      // res.status(500).send({status: 500, message: "Internal Server Error"})
+    }
+
+  
+  }
+  catch(error){
+    next(error)
+  }
 }
