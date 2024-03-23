@@ -1,18 +1,18 @@
 import { NextFunction, Request, Response } from 'express'
-import PlayerModel from '../models/PlayerModel'
+import ItemModel from '../models/ItemModel'
 import { ERROR_TYPES } from '../middleware/errorHandler'
 
 
 export const post = async (req: Request, res: Response) => {
   const data = req.body;
-  const player = new PlayerModel(data)
-  const doc = await player.save();
+  const item = new ItemModel(data)
+  const doc = await item.save();
   res.send(doc);
 }
 
 export const get = async (req: Request, res: Response, next: NextFunction) => {
   try{
-    const data = await PlayerModel.find({});
+    const data = await ItemModel.find({});
     // const data: [] = [];
     if(!data){
       throw new Error(ERROR_TYPES.internalError.message)
@@ -33,7 +33,7 @@ export const getById = async (req: Request, res: Response, next: NextFunction) =
  
   try{
     const { _id } = req.params;
-    const data = await PlayerModel.findById({ _id }).catch(err => {
+    const data = await ItemModel.findById({ _id }).catch(err => {
       throw new Error(ERROR_TYPES.badRequestError.message)
     })
 
@@ -55,7 +55,7 @@ export const put = async (req: Request, res: Response, next: NextFunction) => {
 
   const filter = { _id: data._id };
   const options = { "new": true };
-  const doc = await PlayerModel.findOneAndUpdate(filter, data, options);
+  const doc = await ItemModel.findOneAndUpdate(filter, data, options);
   res.send(doc);  
 }
 

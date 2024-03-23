@@ -1,8 +1,5 @@
 import mongoose from 'mongoose';
-
-interface IPlayer {
-  name: string;
-}
+import IPlayer from '../types/Player';
 
 const PlayerSchema = new mongoose.Schema<IPlayer>({
   name:{
